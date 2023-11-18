@@ -8,14 +8,16 @@ import androidx.security.crypto.EncryptedSharedPreferences
 class EncryptedSharedPreferencesderived {
     companion object {
         lateinit var mSharedPreferences: SharedPreferences
+        /**
+         *  implementing secure shared preferences which can't be easily reverse engineered .
+         **/
         fun getSharedPreferences(context: Context): EncryptedSharedPreferencesderived.Companion {
             val masterKey = MasterKey.Builder(context, MasterKey.DEFAULT_MASTER_KEY_ALIAS)
                 .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
                 .build()
-//         mSharedPreferences=context.getSharedPreferences("vk",Context.MODE_PRIVATE)
             mSharedPreferences = EncryptedSharedPreferences.create(
                 context,
-                "vibhav",
+                "vibhavData",
                 masterKey,
                 EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
                 EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
@@ -25,7 +27,7 @@ class EncryptedSharedPreferencesderived {
         }
 
         fun getName(): String {
-            return mSharedPreferences.getString("vibhav", "lskdjf").toString()
+            return mSharedPreferences.getString("vibhav", "initial value").toString()
         }
 
         fun setName(name:String): Boolean {

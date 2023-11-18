@@ -8,6 +8,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 class RetrofitInstance() {
 
     companion object {
+        /**
+         *  creting the instance of retrofit for api calls .
+         **/
         private val retrofit by lazy {
             val logging = HttpLoggingInterceptor()
             logging.setLevel(HttpLoggingInterceptor.Level.BODY)

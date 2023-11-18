@@ -23,6 +23,9 @@ abstract class DatabaseMain : RoomDatabase() {
         }
 
 
+        /**
+         *  creating the instance of database
+         **/
         private fun createDatabase(context: Context) = Room.databaseBuilder(
             context.applicationContext,
             DatabaseMain::class.java,

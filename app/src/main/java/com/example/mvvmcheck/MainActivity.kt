@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity(), CatAdapter.OnClicItem {
         setContentView(R.layout.activity_main)
         val catRepo = CatRepository(DatabaseMain(this))
         val booksViewModelProviderFactory = MyViewModelProviderFactory(application, catRepo)
+
 //        DisplayToast.displayToast(this,"here is the toast ...")
 //        val recyclerview = findViewById<RecyclerView>(R.id.rv)
 //        recyclerview.layoutManager = LinearLayoutManager(this)
@@ -36,6 +37,10 @@ class MainActivity : AppCompatActivity(), CatAdapter.OnClicItem {
 //        val sp=EncryptedSharedPreferencesderived.getSharedPreferences(this).getName()
 //        Log.e("vibhav",sp)
 
+
+        /**
+         *  observing view model by activity and setting recycler view
+         **/
 //        viewModel.catList.observe(this, Observer {
 //            Log.e("vibhav123", it.toString())
 //            findViewById<ProgressBar>(R.id.pb).visibility= View.GONE
@@ -49,6 +54,11 @@ class MainActivity : AppCompatActivity(), CatAdapter.OnClicItem {
 //            recyclerview.adapter = adapter
 //        })
 
+
+
+        /**
+         *  navigating into different fragments
+         **/
         findViewById<BottomNavigationView>(R.id.bnv).setOnItemSelectedListener {
             when (it.itemId) {
 
@@ -69,6 +79,9 @@ class MainActivity : AppCompatActivity(), CatAdapter.OnClicItem {
     }
 
 
+    /**
+     *  function to replace fragments
+     **/
     private fun replaceFragment(fragment: Fragment) {
 
         val fragmentManager = supportFragmentManager

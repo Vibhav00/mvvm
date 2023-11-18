@@ -27,29 +27,38 @@ class FragmentOne(var k: Int, val mainActivity: MainActivity) : Fragment(), CatA
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        val textView:TextView=view.findViewById(R.id.tv)
+//      val textView:TextView=view.findViewById(R.id.tv)
+        /**
+         *  getting the instance of view model
+         **/
         viewModelMy = (activity as MainActivity).viewModelMy
+        /**
+         *  calling the function getCats which will change the value of live data list<cats> .
+         **/
         viewModelMy.getCats()
+
         val recyclerview = view.findViewById<RecyclerView>(R.id.rv)
         btn = view.findViewById(R.id.btn)
+        /**
+         *  implementing the layout manager for the recycler view
+         **/
         recyclerview.layoutManager = LinearLayoutManager(this.requireContext())
+        /**
+         *  observing 🙄 the value of live data and updating the list of recyclerview  and assigning adapter
+         **/
         viewModelMy.catList.observe(this.requireActivity(), Observer {
-//            Log.e("vibhav123", it.toString())
             view.findViewById<ProgressBar>(R.id.pb).visibility = View.GONE
             recyclerview.visibility = View.VISIBLE
 
 //            tv.text = it.headers().toString()
             // This will pass the ArrayList to our Adapter
             if (it != null) {
-
-
                 val adapter = CatAdapter(it, this, mainActivity)
                 Toast.makeText(mainActivity, "from fragment ${k}", Toast.LENGTH_SHORT).show()
                 recyclerview.adapter = adapter
             }
-
-            // Setting the Adapter with the recyclerview
-//        textView.setText(it.toString())
+//            Setting the Adapter with the recyclerview
+//              textView.setText(it.toString())
         })
     }
 

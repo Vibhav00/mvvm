@@ -32,13 +32,11 @@ class SecondFragment() : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.e("vibhavChcek", view.toString())
         val tv: TextView = view.findViewById<TextView>(R.id.tv)
         (activity as MainActivity).viewModelMy.getAllCat().observe(this.requireActivity()) {
             tv.text = it.size.toString()
         }
 
-//        Log.d("vibhavCheck",temp.toString())
 //        tv.text=.toString()
         Toast.makeText(this.requireContext(), "from second Fragment ", Toast.LENGTH_SHORT).show()
 

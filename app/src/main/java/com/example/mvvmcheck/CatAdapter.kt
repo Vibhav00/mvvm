@@ -16,6 +16,9 @@ class CatAdapter(
     }
 
     interface OnClicItem {
+        /**
+         *  onclick interface for implementing click events
+         **/
         fun onclickItem(pos: Int, cat: Cat)
     }
 
@@ -33,7 +36,13 @@ class CatAdapter(
     override fun onBindViewHolder(holder: CatViewHolder, position: Int) {
         holder.imageView.text = list[position].id
         holder.imageView.setOnClickListener {
+            /**
+             *  controlling onclick events from fragment
+             **/
             onClicItem.onclickItem(position, list[position])
+            /**
+             *  controlling onclick events from activity iteself
+             **/
             onClicItemActivity.onclickItem(position, list[position])
         }
     }
