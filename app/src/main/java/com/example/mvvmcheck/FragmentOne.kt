@@ -16,9 +16,9 @@ import androidx.recyclerview.widget.RecyclerView
 import retrofit2.CallAdapter
 
 
-class FragmentOne(var k:Int,val mainActivity: MainActivity) : Fragment(),CatAdapter.OnClicItem{
-      lateinit var btn:Button
-      lateinit var viewModelMy: ViewModelMy
+class FragmentOne(var k: Int, val mainActivity: MainActivity) : Fragment(), CatAdapter.OnClicItem {
+    lateinit var btn: Button
+    lateinit var viewModelMy: ViewModelMy
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -28,25 +28,24 @@ class FragmentOne(var k:Int,val mainActivity: MainActivity) : Fragment(),CatAdap
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 //        val textView:TextView=view.findViewById(R.id.tv)
-        viewModelMy=(activity as MainActivity).viewModelMy
+        viewModelMy = (activity as MainActivity).viewModelMy
         viewModelMy.getCats()
         val recyclerview = view.findViewById<RecyclerView>(R.id.rv)
-      btn = view.findViewById(R.id.btn)
+        btn = view.findViewById(R.id.btn)
         recyclerview.layoutManager = LinearLayoutManager(this.requireContext())
         viewModelMy.catList.observe(this.requireActivity(), Observer {
 //            Log.e("vibhav123", it.toString())
-            view.findViewById<ProgressBar>(R.id.pb).visibility= View.GONE
-            recyclerview.visibility= View.VISIBLE
+            view.findViewById<ProgressBar>(R.id.pb).visibility = View.GONE
+            recyclerview.visibility = View.VISIBLE
 
 //            tv.text = it.headers().toString()
             // This will pass the ArrayList to our Adapter
-            if(it!=null){
+            if (it != null) {
 
 
-
-            val adapter =CatAdapter(it,this,mainActivity)
-                Toast.makeText(mainActivity,"from fragment ${k}", Toast.LENGTH_SHORT).show()
-            recyclerview.adapter = adapter
+                val adapter = CatAdapter(it, this, mainActivity)
+                Toast.makeText(mainActivity, "from fragment ${k}", Toast.LENGTH_SHORT).show()
+                recyclerview.adapter = adapter
             }
 
             // Setting the Adapter with the recyclerview
@@ -60,7 +59,7 @@ class FragmentOne(var k:Int,val mainActivity: MainActivity) : Fragment(),CatAdap
     ): View? {
         // Inflate the layout for this fragment
 
-        val view:View= inflater.inflate(R.layout.fragment_one, container, false)
+        val view: View = inflater.inflate(R.layout.fragment_one, container, false)
 
         return view
 
@@ -68,9 +67,9 @@ class FragmentOne(var k:Int,val mainActivity: MainActivity) : Fragment(),CatAdap
 
 
     override fun onclickItem(pos: Int, cat: Cat) {
-        val catDatabase= CatDatabase(0,cat.height,cat.id,cat.url,cat.width)
-       val k=viewModelMy.saveCat(catDatabase)
-        Log.e("vibhav","succesfully saved 👩‍🦰")
+        val catDatabase = CatDatabase(0, cat.height, cat.id, cat.url, cat.width)
+        val k = viewModelMy.saveCat(catDatabase)
+        Log.e("vibhav", "succesfully saved 👩‍🦰")
     }
 
 }

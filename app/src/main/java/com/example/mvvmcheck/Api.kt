@@ -8,6 +8,6 @@ interface Api {
     @GET("search")
     suspend fun getCats(
         @Query("limit")
-        limit:Int=10
+        limit: Int = 10
     ): Response<List<Cat>>
 }

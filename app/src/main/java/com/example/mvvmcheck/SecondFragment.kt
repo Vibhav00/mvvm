@@ -24,7 +24,7 @@ class SecondFragment() : Fragment() {
         // Inflate the layout for this fragment
 
 
-        val view:View=inflater.inflate(R.layout.fragment_second, container, false)
+        val view: View = inflater.inflate(R.layout.fragment_second, container, false)
 
         return view;
     }
@@ -32,15 +32,15 @@ class SecondFragment() : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.e("vibhavChcek",view.toString())
-        val tv:TextView=view.findViewById<TextView>(R.id.tv)
+        Log.e("vibhavChcek", view.toString())
+        val tv: TextView = view.findViewById<TextView>(R.id.tv)
         (activity as MainActivity).viewModelMy.getAllCat().observe(this.requireActivity()) {
             tv.text = it.size.toString()
         }
 
 //        Log.d("vibhavCheck",temp.toString())
 //        tv.text=.toString()
-        Toast.makeText(this.requireContext(),"from second Fragment ", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this.requireContext(), "from second Fragment ", Toast.LENGTH_SHORT).show()
 
     }
 

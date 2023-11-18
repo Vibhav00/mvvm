@@ -11,20 +11,19 @@ class ViewModelMy(val catRepository: CatRepository, application: Application) : 
     application
 ) {
     val catList: MutableLiveData<List<Cat>> = MutableLiveData()
-   fun getCats()=viewModelScope.launch{
-      val response=catRepository.getAllCats(10);
-    if(response.isSuccessful){
-        catList.postValue(response.body())
+    fun getCats() = viewModelScope.launch {
+        val response = catRepository.getAllCats(10);
+        if (response.isSuccessful) {
+            catList.postValue(response.body())
+        }
+
     }
 
-}
+    fun saveCat(catDatabase: CatDatabase) = viewModelScope.launch {
+        catRepository.upsert(catDatabase)
+    }
 
-       fun saveCat(catDatabase: CatDatabase)=viewModelScope.launch {
-           catRepository.upsert(catDatabase)
-       }
-       fun getAllCat()= catRepository.getAllCats()
-
-
+    fun getAllCat() = catRepository.getAllCats()
 
 
 }

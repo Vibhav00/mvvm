@@ -10,6 +10,6 @@ class MyViewModelProviderFactory(
 ) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return ViewModelMy( catRepository,app) as T
+        return ViewModelMy(catRepository, app) as T
     }
 }

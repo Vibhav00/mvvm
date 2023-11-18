@@ -15,18 +15,26 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlin.math.log
 
-class MainActivity : AppCompatActivity(),CatAdapter.OnClicItem {
-    lateinit var  viewModelMy:ViewModelMy
+class MainActivity : AppCompatActivity(), CatAdapter.OnClicItem {
+    lateinit var viewModelMy: ViewModelMy
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val catRepo=CatRepository(DatabaseMain(this))
-        val booksViewModelProviderFactory=MyViewModelProviderFactory(application,catRepo)
+        val catRepo = CatRepository(DatabaseMain(this))
+        val booksViewModelProviderFactory = MyViewModelProviderFactory(application, catRepo)
+//        DisplayToast.displayToast(this,"here is the toast ...")
 //        val recyclerview = findViewById<RecyclerView>(R.id.rv)
 //        recyclerview.layoutManager = LinearLayoutManager(this)
 //        val tv:TextView=findViewById(R.id.tv)
-        viewModelMy = ViewModelProvider(this,booksViewModelProviderFactory).get(ViewModelMy::class.java)
-        replaceFragment(FragmentOne(5,this))
+        viewModelMy =
+            ViewModelProvider(this, booksViewModelProviderFactory).get(ViewModelMy::class.java)
+        replaceFragment(FragmentOne(5, this))
+
+
+/**          for shared preferences  **/
+//       EncryptedSharedPreferencesderived.getSharedPreferences(this).setName()
+//        val sp=EncryptedSharedPreferencesderived.getSharedPreferences(this).getName()
+//        Log.e("vibhav",sp)
 
 //        viewModel.catList.observe(this, Observer {
 //            Log.e("vibhav123", it.toString())
@@ -34,22 +42,21 @@ class MainActivity : AppCompatActivity(),CatAdapter.OnClicItem {
 //            recyclerview.visibility= View.VISIBLE
 
 //            tv.text = it.headers().toString()
-            // This will pass the ArrayList to our Adapter
+        // This will pass the ArrayList to our Adapter
 //            val adapter =CatAdapter(it)
 
-            // Setting the Adapter with the recyclerview
+        // Setting the Adapter with the recyclerview
 //            recyclerview.adapter = adapter
 //        })
 
         findViewById<BottomNavigationView>(R.id.bnv).setOnItemSelectedListener {
-            when(it.itemId){
+            when (it.itemId) {
 
-                R.id.home -> replaceFragment(FragmentOne(5,this))
+                R.id.home -> replaceFragment(FragmentOne(5, this))
                 R.id.profile -> replaceFragment(SecondFragment())
                 R.id.settings -> replaceFragment(ThirdFragment())
 
-                else ->{
-
+                else -> {
 
 
                 }
@@ -59,24 +66,21 @@ class MainActivity : AppCompatActivity(),CatAdapter.OnClicItem {
         }
 
 
-
-
     }
 
 
-    private fun replaceFragment(fragment : Fragment){
+    private fun replaceFragment(fragment: Fragment) {
 
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.flid,fragment)
+        fragmentTransaction.replace(R.id.flid, fragment)
         fragmentTransaction.commit()
 
 
     }
 
 
-
     override fun onclickItem(pos: Int, cat: Cat) {
-        Toast.makeText(this,"from main activity",Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "from main activity", Toast.LENGTH_SHORT).show()
     }
 }
